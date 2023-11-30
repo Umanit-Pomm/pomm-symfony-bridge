@@ -29,4 +29,9 @@ class FlexibleEntityNormalizer implements NormalizerInterface
     {
         return $data instanceof FlexibleEntityInterface;
     }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return ['object' => __CLASS__ === static::class];
+    }
 }
