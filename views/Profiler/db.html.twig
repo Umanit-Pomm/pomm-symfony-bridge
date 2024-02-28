@@ -51,9 +51,9 @@
                         </td>
                     </tr>
                 {% else %}
-                    <tr id="queryNo-{{ i }}"  data-target-id="{{ i }}" class="{{ cycle(['odd', 'even'], i) }}"  data-target-id="{{ i }}" data-extra-info="{{ '%0.2f'|format(query.time_ms) }}">
+                    <tr id="queryNo-{{ i }}"  data-target-id="{{ i }}" class="{{ cycle(['odd', 'even'], i) }}"  data-target-id="{{ i }}" data-extra-info="{{ query.time_ms|default(null) ? '%0.2f'|format(query.time_ms) }}">
                         <td>{{ i }}</td>
-                        <td>{{ '%0.2f'|format(query.time_ms) }} &nbsp;ms</td>
+                        <td>{{ query.time_ms|default(null) ? '%0.2f'|format(query.time_ms) }} &nbsp;ms</td>
                         <td id="queryNo-{{ i }}">
                             <div class="query-section" data-state="collapsed" onclick="return expandQuery(this);" title="Expand query" data-target-id="code-{{ i }}" style="cursor: pointer;">
                                 <img alt="+" src="data:image/gif;base64,R0lGODlhEgASAMQTANft99/v+Ga44bHb8ITG52S44dXs9+z1+uPx+YvK6WC24G+944/M6W28443L6dnu+Ge54v/+/l614P///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAABMALAAAAAASABIAQAVS4DQBTiOd6LkwgJgeUSzHSDoNaZ4PU6FLgYBA5/vFID/DbylRGiNIZu74I0h1hNsVxbNuUV4d9SsZM2EzWe1qThVzwWFOAFCQFa1RQq6DJB4iIQA7" style="display: inline;" />
@@ -70,7 +70,7 @@
                             <small>
                                 <strong>Connection</strong> {% if query.session_stamp != null %}{{ query.session_stamp }}{% else %} N/A {% endif %}
                                 | <strong>Parameters</strong>: {{ query.parameters|yaml_dump }}
-                                | <strong>Results</strong>: {{ query.result_count }}
+                                | <strong>Results</strong>: {{ query.result_count|default(null) }}
                                 | <strong>Entity</strong>: <em>{% if query.flexible_entity is defined %}{{ query.flexible_entity }}{% else %} - {% endif %}</em>
                             </small><br/>
                             {% if query.session_stamp != null  %}

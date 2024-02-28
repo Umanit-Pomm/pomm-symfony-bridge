@@ -55,10 +55,14 @@ class FlexibleEntityDenormalizer implements DenormalizerInterface
      */
     public function supportsDenormalization($data, $type, $format = null)
     {
-        $reflection = new \ReflectionClass($type);
-        $interfaces = $reflection->getInterfaces();
+	try {
+            $reflection = new \ReflectionClass($type);
+            $interfaces = $reflection->getInterfaces();
 
-        // @TODO Use FlexibleEntityInterface::class with php >= 5.5
-        return isset($interfaces['PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface']);
+            // @TODO Use FlexibleEntityInterface::class with php >= 5.5
+            return isset($interfaces['PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface']);
+	} catch (\Throwable) {
+            return false;
+        }
     }
 }
