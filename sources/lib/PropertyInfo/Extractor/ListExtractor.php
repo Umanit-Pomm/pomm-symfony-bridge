@@ -47,8 +47,8 @@ class ListExtractor implements PropertyListExtractorInterface
             $model_name = $class . 'Model';
         }
 
-        if (!class_exists($model_name)) {
-            return;
+        if (!class_exists($model_name, false)) {
+            return null;
         }
 
         return $this->getPropertiesList($session, $model_name);
