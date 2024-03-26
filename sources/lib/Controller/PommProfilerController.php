@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\HttpKernel\Profiler\Profiler;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Twig\Environment;
 
 use PommProject\Foundation\Pomm;
 
@@ -35,7 +36,7 @@ class PommProfilerController
     public function __construct(
         UrlGeneratorInterface $generator,
         Profiler $profiler,
-        \Twig_Environment $twig,
+        Environment $twig,
         Pomm $pomm
     ) {
         $this->generator = $generator;
